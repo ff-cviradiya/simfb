@@ -1,0 +1,28 @@
+<%= link_to "SimFacebook", root_path, :class => 'brand' %>  
+<% if user_signed_in? %>
+  &nbsp;|&nbsp; <%= link_to "Friends(#{friends_count})", :controller=>"users", :action=>"friends_list" %>
+  &nbsp;|&nbsp; <%= link_to "Pending Requests(#{pending_request_count})", :controller=>"user_relations", :action=>"pending_requests" %>
+  &nbsp;|&nbsp; <%= link_to 'My Posts', destroy_user_session_path, :method=>'delete' %>
+<% end %>
+<span class="header-links">
+    <ul class="nav">
+      <% if user_signed_in? %>
+        <li>
+        <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
+        </li>
+      <% else %>
+        <li>
+        <%= link_to 'Login', new_user_session_path %>
+        </li>
+      <% end %>
+      <% if user_signed_in? %>
+        <li>
+        <%= link_to 'Edit account', edit_user_registration_path %>
+        </li>
+      <% else %>
+        <li>
+        <%= link_to 'Sign up', new_user_registration_path %>
+        </li>
+      <% end %>
+    </ul>
+</span>

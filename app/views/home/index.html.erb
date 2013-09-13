@@ -1,0 +1,59 @@
+<div class="user-name"><% if user_signed_in? %>WelCome <%= current_user.first_name %>&nbsp;<%= current_user.last_name %><% end %></div>
+<div class="middle-panel">
+	<% if user_signed_in? %>
+		<div class="post-status">
+			<h3>Post Status</h3>
+			<%= form_for(@status) do |f| %>
+			  <% if @status.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@status.errors.count, "error") %> prohibited this status from being saved:</h2>
+			      <ul>
+			      <% @status.errors.full_messages.each do |msg| %>
+			        <li><%= msg %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+			
+			  <div class="field">
+			    <%= f.text_area :description, :rows=>3 %>
+			  </div>
+			  <div class="field hide">
+			    <%= f.label :user_id %><br />
+			    <%= f.text_field :user_id, :value=>current_user.id %>
+			  </div>
+			  <div class="field hide">
+			    <%= f.label :security %><br />
+			    <%= f.text_field :security, :value=>current_user.security %>
+			  </div>
+			  <div class="actions">
+			    <%= f.submit %>
+			  </div>
+			<% end %>
+		</div>
+		<div class="search-friend">
+			Search User:&nbsp;<%= text_field :search, :user %>
+			<div class="user-list">
+			</div>	
+		</div>
+        <div class="view-posts">
+          <h3>Status</h3>
+          <div class="status-list">
+          </div>
+        </div>
+	<% end %>	
+</div>	
+
+<script type="text/javascript">
+    $('#search_user').bind('keyup', function() {
+        var keyWord = $("#search_user").val();
+        $.ajax({
+            type: "POST",
+            url: "users/search_friend?key_word="+keyWord,
+            data: {}
+        }).done(function( data ) {
+           $(".user-list").html('');
+           $(".user-list").html(data);
+        });
+    });
+</script>

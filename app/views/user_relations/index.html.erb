@@ -1,0 +1,27 @@
+<h1>Listing user_relations</h1>
+
+<table>
+  <tr>
+    <th>Request user</th>
+    <th>Receiver user</th>
+    <th>Security</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_relations.each do |user_relation| %>
+  <tr>
+    <td><%= user_relation.request_user_id %></td>
+    <td><%= user_relation.receiver_user_id %></td>
+    <td><%= user_relation.security %></td>
+    <td><%= link_to 'Show', user_relation %></td>
+    <td><%= link_to 'Edit', edit_user_relation_path(user_relation) %></td>
+    <td><%= link_to 'Destroy', user_relation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User relation', new_user_relation_path %>

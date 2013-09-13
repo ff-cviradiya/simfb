@@ -1,0 +1,9 @@
+<ul id="ul_user">
+  <% @user_list.each do | user | %>
+    <% if user.id != current_user.id %>
+	  <li>
+        <%= user.first_name %> &nbsp; <%= user.last_name %> &nbsp; <span style="float:right;"><%= link_to 'Add as Friend', :controller=>"user_relations", :action=>"send_request", :user_id=>user.id %></span>
+	  </li>
+    <% end %>
+  <% end if @user_list %>
+</ul>	
