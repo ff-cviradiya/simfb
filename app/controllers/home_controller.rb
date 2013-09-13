@@ -9,6 +9,6 @@ class HomeController < ApplicationController
     end
     @users = User.fetch_all_users
     @status = Status.new
-
+    @deleteme = 'This is never used'
   end
 end
