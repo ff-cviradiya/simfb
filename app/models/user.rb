@@ -16,4 +16,17 @@ class User < ActiveRecord::Base
 
   validates_length_of :username, :within=>4..8,:allow_blank=>true
 
+
+  def self.fetch_all_users
+    # QUALITY_BREACH - This one breaks the Practise where we should not rescue Exception
+    test = nil
+    begin
+      test = User.all
+    rescue Exception => e
+      test = []
+      logger.warn "Unable to foo, will ignore: #{e}"
+    end
+    test
+  end
+
 end

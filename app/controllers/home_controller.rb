@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
   def index
-    # This code is to understand if code quality metric catches it
+    # QUALITY_BREACH - Unnecessary code.
     10.times do
       2 * 2
     end
-    @users = User.all
+    @users = User.fetch_all_users
     @status = Status.new
 
   end
